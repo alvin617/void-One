@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>System Error</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:monospace;overflow:hidden;text-align:center}
+#awal{padding:50px 20px;position:relative;z-index:5;background:#000}
+#awal h1{font-size:28px;color:#fff}
+#awal p{margin:15px 0;color:#aaa}
+#awal button{padding:16px 35px;background:red;color:#fff;border:none;border-radius:12px;font-size:18px;font-weight:bold}
+#hack{display:none;position:fixed;inset:0;background:#000;z-index:10;overflow:hidden}
+canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.55}
+#isiHack{position:relative;z-index:20;padding:15px;background:rgba(0,0,0,.7)}
+#wajah{width:120px;height:120px;border:3px solid red;border-radius:50%;object-fit:cover;margin:8px auto;display:block}
+#count{font-size:70px;color:red;font-weight:bold;line-height:1}
+#bar{width:100%;height:18px;background:#333;border-radius:10px;overflow:hidden;margin:8px 0}
+#isiBar{height:100%;width:0%;background:red}
+#log{height:70px;overflow:hidden;font-size:11px;text-align:left;color:#0f0}
+#prank{display:none;position:fixed;inset:0;background:#fff;color:#000;z-index:100;align-items:center;justify-content:center;flex-direction:column;padding:20px;font-family:Arial}
+#prank h1{font-size:42px}
+</style>
+</head>
+<body>
+<div id="awal">
+<h1>😱 VIDEO AIB KAWAN LU BOCOR!</h1>
+<p>Klik buat liat, jangan kasih tau siapa-siapa!</p>
+<button onclick="mulai()">LIAT VIDEO NYA ▶️</button>
+<p style="font-size:12px;color:#555;margin-top:20px">Dari: ALVINO</p>
+</div>
+<div id="hack">
+<canvas id="cv"></canvas>
+<div id="isiHack">
+<div style="color:red;font-size:22px;font-weight:bold">☠️ HACKED BY ALVINO! ☠️</div>
+<div style="color:#ff0;font-size:13px">ALVINO SEDANG MENGHACK HP MU!</div>
+<video id="wajah" autoplay playsinline muted></video>
+<div style="color:#ff0;font-size:13px">📍 WAJAH TERDETEKSI! LOKASI DIKIRIM KE ALVINO!</div>
+<div id="log"></div>
+<div id="bar"><div id="isiBar"></div></div>
+<div id="persen" style="color:red;font-size:13px">ALVINO menghapus data... 0%</div>
+<div style="margin-top:5px">💣 HP MELEDAK DALAM:</div>
+<div id="count">10</div>
+<div style="font-size:11px;color:#aaa">Jangan matiin HP! ALVINO bilang jangan dimatiin!</div>
+</div>
+</div>
+<div id="prank">
+<h1>🤣 PRANK! KENA LU! 🤣</h1>
+<p style="font-size:20px;margin:15px 0;line-height:1.6;font-family:Arial">Santuy! HP lu aman! Gak ada virus!<br>Gak ada polisi! Gak bakal meledak!<br><br>Itu tadi cuma prank dari<br><b style="font-size:28px;color:red">ALVINO 😈</b><br><br>Balasan karena lu sering retas HP nya ALVINO!<br><b>Rasakan! Kapok gak?</b></p>
+<p style="font-size:35px">😂😂😂</p>
+<button onclick="location.reload()" style="padding:12px 25px;background:#000;color:#fff;border:none;border-radius:10px;font-weight:bold">UDAH VIN, GUE KAPOK! BALIKIN!</button>
+</div>
+<script>
+let cv=document.getElementById('cv'), ctx=cv.getContext('2d');
+function resize(){ cv.width=innerWidth; cv.height=innerHeight; } resize(); addEventListener('resize',resize);
+let chars="01ABCDEF$#@!<>?/\\0123456789ALVINO";
+let drops=[];
+function initDrops(){ drops=[]; for(let i=0;i<80;i++) drops.push(Math.random()*cv.height); }
+initDrops();
+function hujan(){
+  ctx.fillStyle="rgba(0,0,0,0.08)"; ctx.fillRect(0,0,cv.width,cv.height);
+  ctx.font="14px monospace";
+  for(let i=0;i<drops.length;i++){
+    let c=chars[Math.floor(Math.random()*chars.length)];
+    ctx.fillStyle = Math.random()>0.5 ? "#00ff00" : "#ff0000";
+    let x=i*18, y=drops[i]*18;
+    ctx.fillText(c, x, y);
+    if(y>cv.height && Math.random()>0.98) drops[i]=0;
+    drops[i]++;
+  }
+}
+setInterval(hujan,50);
+let audioCtx;
+function sirine(){ try{ audioCtx=new AudioContext(); let o=audioCtx.createOscillator(), g=audioCtx.createGain(); o.connect(g); g.connect(audioCtx.destination); o.type='sawtooth'; o.frequency.setValueAtTime(400,audioCtx.currentTime); o.frequency.linearRampToValueAtTime(900,audioCtx.currentTime+0.5); o.frequency.linearRampToValueAtTime(400,audioCtx.currentTime+1); g.gain.setValueAtTime(0.08,audioCtx.currentTime); o.start(); o.stop(audioCtx.currentTime+1);}catch(e){} }
+async function mulai(){
+  document.getElementById('awal').style.display='none';
+  document.getElementById('hack').style.display='block';
+  try{ let s=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'}}); document.getElementById('wajah').srcObject=s; }catch(e){ document.getElementById('wajah').style.display='none'; }
+  if(navigator.vibrate) navigator.vibrate([500,100,500,100,500]);
+  let kodeAcak=["HACKED BY ALVINO","ALVINO ACCESS GRANTED","IP: 182.1.XX.XX FOUND","PASSWORD CRACKED BY ALVINO","ALVINO SENDING DATA...","010101 ALVINO HACK","FIREWALL BYPASSED BY ALVINO","VIRUS ALVINO.EXE RUNNING","ALVINO DELETING SYSTEM32","ALVINO UPLOADING PHOTOS..."];
+  let log=document.getElementById('log'), persen=0, detik=10;
+  let t1=setInterval(()=>{ log.innerHTML = "> "+kodeAcak[Math.floor(Math.random()*kodeAcak.length)]+"<br>" + log.innerHTML; sirine(); if(log.innerHTML.split('<br>').length>6) log.innerHTML=log.innerHTML.split('<br>').slice(0,6).join('<br>'); },400);
+  let t2=setInterval(()=>{ persen+=8; if(persen>99) persen=99; document.getElementById('isiBar').style.width=persen+'%'; document.getElementById('persen').innerText='ALVINO menghapus data... '+persen+'%'; if(navigator.vibrate) navigator.vibrate(200); },500);
+  let t3=setInterval(()=>{ document.getElementById('count').innerText=detik; sirine(); if(navigator.vibrate) navigator.vibrate([200,100,200]); detik--; if(detik<0){ clearInterval(t1); clearInterval(t2); clearInterval(t3); setTimeout(()=>{ document.getElementById('prank').style.display='flex'; if(navigator.vibrate) navigator.vibrate(500); },300); } },1000);
+}
+</script>
+</body>
+</html>
